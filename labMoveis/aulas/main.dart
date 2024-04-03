@@ -14,8 +14,8 @@ void main() {
   String nome = "Pedro";
   int idade = 12;
   double preco = 10.5;
-  bool isAdulto = true;
-  const pi = 3.14;
+  // bool isAdulto = true;
+  // const pi = 3.14;
 
   var dado;
   dado = "\nDado";
