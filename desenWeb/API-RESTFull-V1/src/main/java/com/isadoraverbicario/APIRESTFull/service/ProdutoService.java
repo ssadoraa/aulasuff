@@ -16,4 +16,16 @@ public class ProdutoService {
     public List<Produto> recuperarProdutos() {
         return produtoRepository.findAll(Sort.by("id"));
     }
+
+    public Produto cadastrarProduto(Produto produto) {
+        return produtoRepository.save(produto);        
+    }
+    
+    public Produto alterarProduto(Produto produto) {
+        return produtoRepository.save(produto);        
+    }
+    
+    public void removerProduto(Long id) {
+        produtoRepository.deleteById(id);        
+    }
 }
