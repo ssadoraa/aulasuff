@@ -2,8 +2,6 @@ package com.carlosribeiro.apirestful.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.yaml.snakeyaml.tokens.ScalarToken;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

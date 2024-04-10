@@ -7,7 +7,6 @@ import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

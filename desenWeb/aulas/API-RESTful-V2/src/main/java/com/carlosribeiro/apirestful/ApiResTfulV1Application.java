@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootApplication
 public class ApiResTfulV1Application implements CommandLineRunner {
