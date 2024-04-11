@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootApplication
 public class ApiResTfulV1Application implements CommandLineRunner {
@@ -60,11 +59,11 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				legume);
 		produtoRepository.save(produto);
 
-		Categoria categoria = categoriaRepository.recuperarCategoriaComProdutosPorIdDaCategoria(1L);
-		System.out.println(categoria.getNome());
-		for (Produto prod : categoria.getProdutos()) {
-			System.out.println(prod);
-		}
+		// Categoria categoria = categoriaRepository.recuperarCategoriaComProdutosPorIdDaCategoria(1L);
+		// System.out.println(categoria.getNome());
+		// for (Produto prod : categoria.getProdutos()) {
+		// 	System.out.println(prod);
+		// }
 	}
 
 }

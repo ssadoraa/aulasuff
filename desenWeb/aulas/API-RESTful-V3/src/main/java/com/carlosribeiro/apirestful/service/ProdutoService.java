@@ -7,7 +7,6 @@ import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,21 +31,6 @@ public class ProdutoService {
         }
     }
 
-//    public Produto alterarProduto(Produto produto) {
-//        if (produto.getId() == null) {
-//            throw new EntidadeTransienteException("Tentando alterar um objeto transiente.");
-//        }
-//        else {
-//            if (produtoRepository.findById(produto.getId()).isPresent()) {
-//                return produtoRepository.save(produto);
-//            }
-//            else {
-//                throw new EntidadeNaoEncontradaException(
-//                        "Produto número " + produto.getId() + " não encontrado.");
-//            }
-//        }
-//    }
-
     public Produto alterarProduto(Produto produto) {
         if (produto.getId() == null) {
             throw new EntidadeTransienteException("Tentando alterar um objeto transiente.");
@@ -64,5 +48,13 @@ public class ProdutoService {
             .orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Produto número " + id + " não encontrado."));
         produtoRepository.delete(p);
+    }
+
+    public List<Produto> recuperarProdutosPorIdCategoria(Long categoriaId){
+        return produtoRepository.findByCategoriaId(categoriaId);
+    }
+    
+    public List<Produto> recuperarProdutosComCategoria(){
+        return produtoRepository.recuperarProdutosComCategoria();
     }
 }

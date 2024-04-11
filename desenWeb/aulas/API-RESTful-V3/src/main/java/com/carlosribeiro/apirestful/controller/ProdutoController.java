@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("produtos")
@@ -36,4 +37,15 @@ public class ProdutoController {
     public void removerProduto(@PathVariable("idProduto") Long id) {
         produtoService.removerProduto(id);
     }
+
+    @GetMapping("categoria/{id}")
+    public List<Produto> recuperarProdutoPorIdCategoria(@PathVariable("id") Long categotiaId){
+        return produtoService.recuperarProdutosPorIdCategoria(categotiaId);
+    }
+
+    @GetMapping("categoria")
+    public List<Produto> recuperarProdutosComCategoria() {
+        return produtoService.recuperarProdutosComCategoria();
+    }
+    
 }
