@@ -16,6 +16,11 @@ void main() {
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            Image.asset(
+              "images/default.png", 
+              width: 300, 
+              height: 200 
+            ),
             Text("Widget 1"),
             Text("Container 2",
                 style: TextStyle(
@@ -39,12 +44,27 @@ void main() {
                 print("Clicado");
               }, 
               child: Text("Clique aqui")),
-              GestureDetector(
-                onTap: (){
-                  print("Gesture Detector");
-                },
-                child: Text("TEXT com Gesture Detector"),
+            GestureDetector(
+              onTap: (){
+                print("Gesture Detector");
+              },
+              child: Text("TEXT com Gesture Detector"),
+            ),
+            IconButton(
+              onPressed: () {
+                print("IconButton Clicado!");
+              }, 
+              icon: Icon(Icons.add)
+            ),
+            Padding(
+              padding: EdgeInsets.all(40),
+              child: GestureDetector(
+              onLongPress: () {
+                print("Gesture Detector ativo");
+              },
+              child: Text("TEXT com Gesture Detector"),
               )
+            ),
           ],
         ),
       ),
