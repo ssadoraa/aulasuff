@@ -1,12 +1,9 @@
-
 .card-link {
     text-decoration: none;
 }
 
-.custom-card {
-    height: 110px;
-    border: none;
-    background-color: #e5e5e5;
+.card-custom {
+    height: 350px;
 }
 
 .img-circle {

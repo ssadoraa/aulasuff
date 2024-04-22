@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Cadastro - Troca Na Boa</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/geral.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="cadastro-tab" data-bs-toggle="tab" href="#cadastro" role="tab" aria-controls="cadastro" aria-selected="false">Cadastro</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- Formulário de Login -->
+                            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="emailLogin" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="emailLogin" placeholder="Seu email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="senhaLogin" class="form-label">Senha</label>
+                                        <input type="password" class="form-control" id="senhaLogin" placeholder="Sua senha">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Entrar</button>
+                                </form>
+                            </div>
+
+                            <!-- Formulário de Cadastro -->
+                            <div class="tab-pane fade" id="cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="nomeCadastro" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="nomeCadastro" placeholder="Seu nome">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailCadastro" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="emailCadastro" placeholder="Seu email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="senhaCadastro" class="form-label">Senha</label>
+                                        <input type="password" class="form-control" id="senhaCadastro" placeholder="Sua senha">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+</body>
+
+</html>

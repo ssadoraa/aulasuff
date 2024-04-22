@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Produtos - Troca de Produtos</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../../assets/css/geral.css">
+</head>
+
+<body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="../geral/home.html">Troca Na Boa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Produtos
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="produtos.html">Listar todos</a></li>
+                          <li><a class="dropdown-item" href="meusprodutos.html">Meus produtos</a></li>
+                          <li><a class="dropdown-item" href="cadastro.html">Cadastrar produto</a></li>
+                        </ul>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../geral/sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../geral/suporte.html">Suporte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Meus Produtos</h1>
+        
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-publicados-tab" data-bs-toggle="pill" data-bs-target="#pills-publicados" type="button" role="tab" aria-controls="pills-publicados" aria-selected="true">Publicados</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-trocados-tab" data-bs-toggle="pill" data-bs-target="#pills-trocados" type="button" role="tab" aria-controls="pills-trocados" aria-selected="false">Trocados</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-publicados" role="tabpanel" aria-labelledby="pills-publicados-tab">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Produto A</td>
+                                <td>R$ 50,00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Produto B</td>
+                                <td>R$ 30,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-trocados" role="tabpanel" aria-labelledby="pills-trocados-tab">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Produto C</td>
+                                <td>R$ 25,00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Produto D</td>
+                                <td>R$ 40,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <a href="cadastro.html" class="btn btn-primary">Cadastrar</a>
+    </div>
+
+    <footer class="footer py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 Troca de Produtos. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="../../assets/js/bootstrap.js"></script>
+</body>
+
+</html>

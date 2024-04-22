@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Produto</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../../assets/css/geral.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="../geral/home.html">Troca Na Boa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Produtos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="produtos.html">Listar todos</a></li>
+                            <li><a class="dropdown-item" href="meusprodutos.html">Meus produtos</a></li>
+                            <li><a class="dropdown-item" href="cadastro.html">Cadastrar produto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../geral/sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../geral/suporte.html">Suporte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Detalhes do Produto</h1>
+        <div class="row mt-4">
+            <!-- Seção com as imagens -->
+            <div class="col-md-6">
+                <h4>Imagens</h4>
+                <ul class="nav nav-tabs" id="imagensTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="imagem1-tab" data-bs-toggle="tab" data-bs-target="#imagem1" type="button" role="tab" aria-controls="imagem1" aria-selected="true">Imagem 1</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="imagem2-tab" data-bs-toggle="tab" data-bs-target="#imagem2" type="button" role="tab" aria-controls="imagem2" aria-selected="false">Imagem 2</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="imagem3-tab" data-bs-toggle="tab" data-bs-target="#imagem3" type="button" role="tab" aria-controls="imagem3" aria-selected="false">Imagem 3</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="imagensTabContent">
+                    <div class="tab-pane fade show active" id="imagem1" role="tabpanel" aria-labelledby="imagem1-tab">
+                        <img src="caminho_da_imagem1.jpg" class="img-fluid mb-2" alt="Imagem 1">
+                    </div>
+                    <div class="tab-pane fade" id="imagem2" role="tabpanel" aria-labelledby="imagem2-tab">
+                        <img src="caminho_da_imagem2.jpg" class="img-fluid mb-2" alt="Imagem 2">
+                    </div>
+                    <div class="tab-pane fade" id="imagem3" role="tabpanel" aria-labelledby="imagem3-tab">
+                        <img src="caminho_da_imagem3.jpg" class="img-fluid mb-2" alt="Imagem 3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção com as informações -->
+            <div class="col-md-6">
+                <h4>Informações do Produto</h4>
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-4 col-form-label">Nome:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control-plaintext" id="nome" value="Nome do Produto" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="categoria" class="col-sm-4 col-form-label">Categoria:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control-plaintext" id="categoria" value="Categoria do Produto" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="condicao" class="col-sm-4 col-form-label">Condição:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control-plaintext" id="condicao" value="Condição do Produto" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="valor" class="col-sm-4 col-form-label">Valor Estimado:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control-plaintext" id="valor" value="999.99" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="status" class="col-sm-4 col-form-label">Status:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control-plaintext" id="status" value="Disponível" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="col-form-label">Descrição:</label>
+                <input type="text" class="form-control-plaintext" id="descricao" value="Descrição do Produto" readonly></input>
+            </div>
+
+            <button type="button" class="btn btn-primary">Negociar</button>
+
+        </div>
+    </div>
+
+    <footer class="footer py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 Troca de Produtos. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="../../assets/js/bootstrap.js"></script>
+</body>
+
+</html>
