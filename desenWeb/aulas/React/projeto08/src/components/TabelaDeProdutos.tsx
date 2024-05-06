@@ -1,12 +1,12 @@
-import dayjs from "dayjs";
 import Produto from "../interfaces/produto";
+import { Link } from "react-router-dom";
+import '../css/geral.css';
 
 interface Props {
   produtos: Produto[];
 }
 
 const TabelaDeProdutos = ({ produtos }: Props) => {
-  // console.log(produtos[0].nome);
   return (
     <table className="table table-responsive table-sm table-hover table-bordered">
       <thead>
@@ -15,9 +15,8 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
           <th className="align-middle text-center">Imagem</th>
           <th className="align-middle text-center">Categoria</th>
           <th className="align-middle text-center">Nome</th>
-          <th className="align-middle text-center">Disponível</th>
-          <th className="align-middle text-center">Data de Cadastro</th>
-          <th className="align-middle text-center">Preço</th>
+          <th className="align-middle text-center">Condição</th>
+          <th className="align-middle text-center">Status</th>
           <th className="align-middle text-center">Ação</th>
         </tr>
       </thead>
@@ -27,15 +26,12 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
             <td width="8%" className="align-middle text-center">{produto.id}</td>
             <td width="12%" className="align-middle text-center"><img src={produto.imagem} width={45} /></td>
             <td width="12%" className="align-middle text-center">{produto.categoria.nome}</td>
-            <td width="20%" className="align-middle">{produto.nome}</td>
-            <td width="12%" className="align-middle text-center">{produto.disponivel ? "Sim" : "Não"}</td>
-            <td width="12%" className="align-middle text-center">{dayjs(produto.dataCadastro).format("DD/MM/YYYY")}</td>
-            <td width="12%" className="align-middle text-end pe-3">{produto.preco.toLocaleString("pt-BR", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-              useGrouping: true
-            })}</td>
-            <td width="12%" className="align-middle text-center"><button className="btn btn-danger btn-sm">Remover</button></td>
+            <td width="28%" className="align-middle text-center">{produto.nome}</td>
+            <td width="8%" className="align-middle text-center">{produto.condicao}</td>
+            <td width="12%" className="align-middle text-center">{produto.status}</td>
+            <td width="8%" className="align-middle text-center">
+              <Link className="btn btn-danger btn-sm" to={`/ver/${produto.id}`}>Ver</Link>
+            </td>
           </tr>
         ))}
       </tbody>

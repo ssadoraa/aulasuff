@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CarrinhoPage from '../pages/CarrinhoPage';
 import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
 import Layout from './Layout';
 import CadastroDeProdutosPage from '../pages/CadastroDeProdutosPage';
 import ListaDeProdutosPage from '../pages/ListaDeProdutosPage';
 import ErrorPage from '../pages/ErrorPage';
+import SobrePage from '../pages/SobrePage';
+import SuportePage from '../pages/SuportePage';
+import VerProdutoPage from '../pages/VerProdutoPage';
 
 const router = createBrowserRouter([
     {
@@ -15,9 +16,10 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <HomePage /> },
             { path: "listar-produtos", element: <ListaDeProdutosPage /> },
-            { path: "login", element: <LoginPage /> },            
             { path: "cadastrar-produto", element: <CadastroDeProdutosPage /> },            
-            { path: "carrinho", element: <CarrinhoPage /> },            
+            { path: "sobre", element: <SobrePage /> },            
+            { path: "suporte", element: <SuportePage /> },            
+            { path: "ver/:id", element: <VerProdutoPage /> },            
         ]
     }
 ]);

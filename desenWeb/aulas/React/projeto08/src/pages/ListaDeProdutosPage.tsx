@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TabelaDeProdutos from "../components/TabelaDeProdutos";
-import useProdutosComPaginacao from "../hooks/useProdutosComPaginacao";
+import useProdutosComPaginacao from "../hooks/produtos/useProdutosComPaginacao";
 import Paginacao from "../components/Paginacao";
 
 const ListaDeProdutosPage = () => {
@@ -24,12 +24,16 @@ const ListaDeProdutosPage = () => {
   const totalDePaginas = resultadoPaginado.totalDePaginas;
 
   return (
-    <>
+    <div className="container mt-5">
       <h4>Lista de Produtos</h4>
       <hr className="mt-1" />
       <TabelaDeProdutos produtos={produtos} />
-      <Paginacao pagina={pagina} totalDePaginas={totalDePaginas} tratarPaginacao={tratarPaginacao} />
-    </>
+      <Paginacao
+        pagina={pagina}
+        totalDePaginas={totalDePaginas}
+        tratarPaginacao={tratarPaginacao}
+      />
+    </div>
   );
 };
 export default ListaDeProdutosPage;
