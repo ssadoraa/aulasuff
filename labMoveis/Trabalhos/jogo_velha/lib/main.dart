@@ -4,7 +4,7 @@ import 'package:jogo_velha/home.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: "Interface com Scaffold",
+    title: "Jogo da Velha - App1",
     debugShowCheckedModeBanner: false,
     home: Home()
   ));
