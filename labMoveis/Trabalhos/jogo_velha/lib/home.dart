@@ -302,7 +302,7 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text("Salvar"),
+                child: Text("Começar"),
               ),
             ],
           ),
