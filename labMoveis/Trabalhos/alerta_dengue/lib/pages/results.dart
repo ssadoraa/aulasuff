@@ -111,7 +111,7 @@ class _ResultsState extends State<Results> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange.shade900))
                   );
                 } else if (snapshot.hasError) {
                   return Center(

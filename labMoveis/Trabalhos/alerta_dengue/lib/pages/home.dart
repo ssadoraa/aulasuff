@@ -135,7 +135,7 @@ class _HomeState extends State<Home> {
                     future: getEstados(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange.shade900));
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (snapshot.hasData) {
@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
                     future: getCidades(estado),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange.shade900));
                       } else if (snapshot.hasError) {
                         return Text('Erro ao carregar estados: ${snapshot.error}');
                       } else if (snapshot.hasData) {
@@ -257,19 +257,42 @@ class _HomeState extends State<Home> {
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.only(top: 20, bottom: 20, left: 40, right: 40)),                
                 ),
                 onPressed: () async {
-                  final result = await Navigator.pushNamed(
-                    context,
-                    Results.routeName,
-                    arguments: Arguments(
-                      doenca!,
-                      cidade!,
-                      dataInicio!,
-                      dataFim!
-                    ),
-                  );
+                  if (doenca == null || estado == null || cidade == null || dataInicio == null || dataFim == null) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Campos obrigatórios'),
+                          content: Text("Todos os campos devem ser preenchidos para realizar a consulta."),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Voltar',
+                              style: TextStyle(
+                                color: Colors.deepOrange.shade900,
+                              )),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    final result = await Navigator.pushNamed(
+                      context,
+                      Results.routeName,
+                      arguments: Arguments(
+                        doenca!,
+                        cidade!,
+                        dataInicio!,
+                        dataFim!
+                      ),
+                    );
 
-                  if (result == true) {
-                    limparCampos();
+                    if (result == true) {
+                      limparCampos();
+                    }
                   }
                 },
                 child: Text(
