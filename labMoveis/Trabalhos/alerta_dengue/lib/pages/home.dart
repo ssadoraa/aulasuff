@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:alerta_dengue/model/arguments.dart';
 import 'package:alerta_dengue/pages/results.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -38,6 +39,14 @@ class _HomeState extends State<Home> {
     }
   }
 
+  void limparCampos(){
+    doenca = null;
+    estado = null;
+    cidade = null;
+    dataInicio = null;
+    dataFim = null;
+  }
+
   Future<List<Map<String, dynamic>>> getCidades(int? estadoSelecionado) async {
     String url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/$estadoSelecionado/municipios";
     http.Response response = await http.get(Uri.parse(url));
@@ -69,7 +78,7 @@ class _HomeState extends State<Home> {
             color: Colors.deepOrange.shade900,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 252, 185, 165),
+        backgroundColor: Color.fromARGB(255, 252, 185, 165),
       ),
       body: Center(
         child: Container(
@@ -92,111 +101,133 @@ class _HomeState extends State<Home> {
                   });
                 },
               ),
-              
-              FutureBuilder<List<Map<String, dynamic>>>(
-                future: getEstados(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    List<Map<String, dynamic>> estados = snapshot.data!;
-                    return DropdownButton<int>(
-                      value: estado,
-                      hint: Text('Selecione o estado'),
-                      items: estados.map((estado) {
-                        return DropdownMenuItem<int>(
-                          value: estado['id'],
-                          child: Text(estado['sigla']),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: getEstados(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        List<Map<String, dynamic>> estados = snapshot.data!;
+                        return DropdownButton<int>(
+                          value: estado,
+                          hint: Text('Selecione o estado'),
+                          items: estados.map((estado) {
+                            return DropdownMenuItem<int>(
+                              value: estado['id'],
+                              child: Text(estado['sigla']),
+                            );
+                          }).toList(),
+                          onChanged: (int? estadoSelecionado) {
+                            setState(() {
+                              estado = estadoSelecionado;
+                              cidades = [];
+                            });
+                          },
                         );
-                      }).toList(),
-                      onChanged: (int? estadoSelecionado) {
-                        setState(() {
-                          estado = estadoSelecionado;
-                          cidades = [];
-                        });
-                      },
-                    );
-                  } else {
-                    return Text('Nenhum dado disponível');
-                  }
-                },
+                      } else {
+                        return Text('Nenhum dado disponível');
+                      }
+                    },
+                  ),
+                  
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: getCidades(estado),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Erro ao carregar estados: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        List<Map<String, dynamic>> cidades = snapshot.data!;
+                        return DropdownButton<int>(
+                          value: cidade,
+                          hint: Text('Selecione a cidade'),
+                          items: cidades.map((cidade) {
+                            return DropdownMenuItem<int>(
+                              value: cidade['id'],
+                              child: Text(cidade['nome']),
+                            );
+                          }).toList(),
+                          onChanged: (int? cidadeSelecionado) {
+                            setState(() {
+                              cidade = cidadeSelecionado;
+                            });
+                          },
+                        );
+                      } else {
+                        return Text('Nenhum dado disponível');
+                      }
+                    },
+                  ),
+                ],
               ),
 
-              FutureBuilder<List<Map<String, dynamic>>>(
-                future: getCidades(estado),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Erro ao carregar estados: ${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    List<Map<String, dynamic>> cidades = snapshot.data!;
-                    return DropdownButton<int>(
-                      value: cidade,
-                      hint: Text('Selecione a cidade'),
-                      items: cidades.map((cidade) {
-                        return DropdownMenuItem<int>(
-                          value: cidade['id'],
-                          child: Text(cidade['nome']),
-                        );
-                      }).toList(),
-                      onChanged: (int? cidadeSelecionado) {
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      final DateTime? dataInicioEscolhida = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (dataInicioEscolhida != null) {
                         setState(() {
-                          cidade = cidadeSelecionado;
+                          dataInicio = dataInicioEscolhida;
                         });
-                      },
-                    );
-                  } else {
-                    return Text('Nenhum dado disponível');
-                  }
-                },
-              ),
-              
-              TextButton(
-                onPressed: () async {
-                  final DateTime? dataInicioEscolhida = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                  );
-                  if (dataInicioEscolhida != null) {
-                    setState(() {
-                      dataInicio = dataInicioEscolhida;
-                    });
-                  }
-                },
-                child: Text(
-                  dataInicio == null
-                      ? 'Selecione a data da semana do início'
-                      : 'Data de início: ${dataInicio!.toString().split(' ')[0]}',
-                ),
-              ),
-
-              TextButton(
-                onPressed: () async {
-                  final DateTime? dataFinalEscolhida = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                  );
-                  if (dataFinalEscolhida != null) {
-                    setState(() {
-                      dataFim = dataFinalEscolhida;
-                    });
-                  }
-                },
-                child: Text(
-                  dataFim == null
-                      ? 'Selecione a data da semana do final'
-                      : 'Data de fim: ${dataFim!.toString().split(' ')[0]}',
-                ),
+                      }
+                    },
+                    child: Text(
+                      dataInicio == null
+                          ? 'Selecione a data do início'
+                          : "Data Início: ${DateFormat('dd/MM/yyyy').format(dataInicio!)}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 107, 107, 107),
+                      ),
+                    ),
+                  ),
+                  
+                  TextButton(
+                    onPressed: () async {
+                      final DateTime? dataFinalEscolhida = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (dataFinalEscolhida != null) {
+                        setState(() {
+                          dataFim = dataFinalEscolhida;
+                        });
+                      }
+                    },
+                    child: Text(
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 107, 107, 107)
+                      ),
+                      dataFim == null
+                          ? 'Selecione a data do final'
+                          : "Data Fim: ${DateFormat('dd/MM/yyyy').format(dataFim!)}",
+                    ),
+                  ),
+                ],
               ),
 
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 185, 165)),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.only(top: 20, bottom: 20, left: 40, right: 40)),                
+                ),
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
@@ -209,7 +240,33 @@ class _HomeState extends State<Home> {
                     ),
                   );
                 },
-                child: Text("Consultar"),
+                child: Text(
+                  "Consultar",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 185, 165)),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(20)),
+                ),
+                onPressed: () {
+                    limparCampos();
+                    setState(() {});
+                },
+                child: Text(
+                  "Limpar campos",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

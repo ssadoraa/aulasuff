@@ -47,50 +47,111 @@ class _ResultsState extends State<Results> {
             color: Colors.deepOrange.shade900,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 252, 185, 165),
+        backgroundColor: Color.fromARGB(255, 252, 185, 165),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.deepOrange.shade900,
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Center(
-        child: FutureBuilder<List<dynamic>>(
-          future: encontraResultados(args),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (snapshot.hasData){
-              List<dynamic>? results = snapshot.data;
-              return ListView.builder(
-                itemCount: results!.length,
-                itemBuilder: (context, index) {
-                  var week = results[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text('Semana: ${week['week']}'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Casos previstos: ${week['casos_est']}'),
-                          Text('Casos notificados: ${week['casos']}'),
-                          Text('Nível: ${week['nivel']}'),
-                          Text('Temperatura mínima: ${week['tempmin']}°C'),
-                          Text('Temperatura máxima: ${week['tempmax']}°C'),
-                        ],
-                      ),
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(6.0),
+            child: Text(
+              "Resultados para os filtros:",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(6.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Município: ${args.municipioId}",
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Doença: ${args.doenca}",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+          
+          Padding(
+            padding: EdgeInsets.all(6.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Data Início: ${DateFormat('dd/MM/yyyy').format(args.dataInicio)}",
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Data Fim: ${DateFormat('dd/MM/yyyy').format(args.dataFim)}",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+          
+          Expanded(
+            child: FutureBuilder<List<dynamic>>(
+              future: encontraResultados(args),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              );
-            } else {
-              return Text('Nenhum dado disponível');
-            }
-          },
-        ),
-      )
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                } else if (snapshot.hasData) {
+                  List<dynamic>? resultados = snapshot.data;
+                  return ListView.builder(
+                    itemCount: resultados!.length,
+                    itemBuilder: (context, index) {
+                      var semana = resultados[index];
+                      return Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Card(
+                          child: ListTile(
+                            title: Text('Semana: ${semana['semana']}'),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Casos previstos: ${semana['casos_est']}'),
+                                Text('Casos notificados: ${semana['casos']}'),
+                                Text('Nível: ${semana['nivel']}'),
+                                Text('Temperatura mínima: ${semana['tempmin']}°C'),
+                                Text('Temperatura máxima: ${semana['tempmax']}°C'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Text('Nenhum dado disponível'),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
