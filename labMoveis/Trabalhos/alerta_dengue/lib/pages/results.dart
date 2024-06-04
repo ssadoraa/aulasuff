@@ -24,7 +24,6 @@ class _ResultsState extends State<Results> {
     int eyEnd = args.dataFim.year;
 
     String url = '$baseUrl?geocode=$geocode&disease=$disease&format=$format&ew_start=$ewStart&ew_end=$ewEnd&ey_start=$eyStart&ey_end=$eyEnd';
-
     http.Response response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -57,6 +56,7 @@ class _ResultsState extends State<Results> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: 40),
           Padding(
             padding: EdgeInsets.all(6.0),
             child: Text(
@@ -103,7 +103,8 @@ class _ResultsState extends State<Results> {
               ],
             ),
           ),
-          
+
+          SizedBox(height: 15),
           Expanded(
             child: FutureBuilder<List<dynamic>>(
               future: encontraResultados(args),
@@ -126,7 +127,7 @@ class _ResultsState extends State<Results> {
                         padding: EdgeInsets.all(8.0),
                         child: Card(
                           child: ListTile(
-                            title: Text('Semana: ${semana['semana']}'),
+                            title: Text('Semana: ${index + 1}'),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

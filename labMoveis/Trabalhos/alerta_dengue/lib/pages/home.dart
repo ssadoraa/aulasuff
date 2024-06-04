@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void limparCampos(){
+  void limparCampos() {
     doenca = null;
     estado = null;
     cidade = null;
@@ -71,21 +71,44 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Alerta Dengue",
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.deepOrange.shade900,
-          ),
+        title: Row(
+          children: [
+            Icon(Icons.health_and_safety, color: Colors.deepOrange.shade900),
+            SizedBox(width: 10),
+            Text(
+              "Alerta Dengue",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.deepOrange.shade900,
+              ),
+            ),
+          ],
         ),
         backgroundColor: Color.fromARGB(255, 252, 185, 165),
       ),
       body: Center(
         child: Container(
+          padding: EdgeInsets.all(80),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                color: Colors.deepOrange,
+                size: 48,
+              ),
 
+              SizedBox(height: 30),
+              Text(
+                "Bem-vindo ao Alerta Dengue!\n Informe os dados abaixo para obter informações sobre casos de doenças transmitidas por mosquitos na sua cidade.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 107, 107, 107),
+                ),
+              ),
+
+              SizedBox(height: 50),
               DropdownButton<String>(
                 value: doenca,
                 hint: Text('Selecione a doença'),
@@ -102,6 +125,7 @@ class _HomeState extends State<Home> {
                 },
               ),
 
+              SizedBox(height: 45),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -135,7 +159,7 @@ class _HomeState extends State<Home> {
                       }
                     },
                   ),
-                  
+
                   FutureBuilder<List<Map<String, dynamic>>>(
                     future: getCidades(estado),
                     builder: (context, snapshot) {
@@ -168,6 +192,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
 
+              SizedBox(height: 45),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -195,7 +220,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  
+
                   TextButton(
                     onPressed: () async {
                       final DateTime? dataFinalEscolhida = await showDatePicker(
@@ -223,6 +248,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
 
+              SizedBox(height: 100),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 185, 165)),
@@ -249,7 +275,8 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-            
+
+              SizedBox(height: 25),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 185, 165)),
