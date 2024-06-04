@@ -50,7 +50,7 @@ class _ResultsState extends State<Results> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.deepOrange.shade900,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, true),
         ),
       ),
       body: Column(
@@ -159,8 +159,7 @@ class _ResultsState extends State<Results> {
 
 extension DateTimeExtension on DateTime {
   int get converterSemanaDoAno {
-    int dayOfYear = int.parse(DateFormat("D").format(this));
-    int woy = ((dayOfYear - weekday + 10) / 7).floor();
-    return woy;
+    int dia = int.parse(DateFormat("D").format(this));
+    return ((dia - weekday + 10) / 7).floor();
   }
 }

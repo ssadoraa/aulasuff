@@ -40,11 +40,13 @@ class _HomeState extends State<Home> {
   }
 
   void limparCampos() {
-    doenca = null;
-    estado = null;
-    cidade = null;
-    dataInicio = null;
-    dataFim = null;
+    setState(() {
+      doenca = null;
+      estado = null;
+      cidade = null;
+      dataInicio = null;
+      dataFim = null;
+    });
   }
 
   Future<List<Map<String, dynamic>>> getCidades(int? estadoSelecionado) async {
@@ -254,8 +256,8 @@ class _HomeState extends State<Home> {
                   backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 185, 165)),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.only(top: 20, bottom: 20, left: 40, right: 40)),                
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(
+                onPressed: () async {
+                  final result = await Navigator.pushNamed(
                     context,
                     Results.routeName,
                     arguments: Arguments(
@@ -265,6 +267,10 @@ class _HomeState extends State<Home> {
                       dataFim!
                     ),
                   );
+
+                  if (result == true) {
+                    limparCampos();
+                  }
                 },
                 child: Text(
                   "Consultar",
@@ -284,7 +290,6 @@ class _HomeState extends State<Home> {
                 ),
                 onPressed: () {
                     limparCampos();
-                    setState(() {});
                 },
                 child: Text(
                   "Limpar campos",
