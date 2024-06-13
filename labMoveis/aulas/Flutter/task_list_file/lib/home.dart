@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   TextEditingController taskController = TextEditingController();
+  TextEditingController taskController2 = TextEditingController();
   List<dynamic> taskList = [];
 
   @override
@@ -32,18 +33,105 @@ class _HomeState extends State<Home> {
 
   Widget listItemBuild(BuildContext context, int index){
 
-    return CheckboxListTile(
-      title: Text(taskList[index]["title"]),
-      value: taskList[index]["done"],
-      onChanged: (bool? val) {
-        taskList[index]["done"] = val;
-        setState(() {});
-        _saveFile();
+    return Dismissible(
+      key: Key(DateTime.now().microsecondsSinceEpoch.toString()),
+      direction: DismissDirection.horizontal, 
+      onDismissed: (direction) {
+        print("Direction: ${direction.toString()}");
+
+        var lastRemovedTask;
+
+        if (direction == DismissDirection.startToEnd) {
+            taskController2.text = taskList[index]["title"];
+
+            showDialog(
+              context: context, 
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Atualizar Tarefa"),
+                  content: TextField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: "Digite sua tarefa:"
+                    ),
+                    controller: taskController2,
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text("Cancelar"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      } 
+                    ),
+
+                    TextButton(
+                      child: Text("Atualizar"),
+                      onPressed: () {
+                        _updateTask(index);
+                        Navigator.pop(context);
+                      } 
+                    )
+                  ],
+                );
+              }
+            );
+        
+        } else if (direction == DismissDirection.endToStart) {
+
+          lastRemovedTask = taskList[index];
+          taskList.removeAt(index);
+          _saveFile();
+
+          final snackBar = SnackBar(
+            content: Text("Tarefa excluída!"),
+            duration: Duration(seconds: 5),
+            action: SnackBarAction(
+              label: "Desfazer",
+              onPressed: () {
+                setState(() {
+                  taskList.insert(index, lastRemovedTask);
+                });
+                _saveFile();
+              },
+            ),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       },
-    );
+      background: Container(
+        color: Colors.green,
+        padding: EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.edit, color: Colors.white,)
+          ],
+        ),
+      ),
+      secondaryBackground: Container(
+        color: Colors.red,
+        padding: EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Icon(Icons.delete, color: Colors.white,)
+          ],
+        ),
+      ),
+      child: CheckboxListTile(
+              title: Text(taskList[index]["title"]),
+              value: taskList[index]["done"],
+              onChanged: (bool? val) {
+                taskList[index]["done"] = val;
+                setState(() {});
+                _saveFile();
+              },
+            )
+      );
   }
 
-  void _saveTas() {
+  void _saveTask() {
     String taskStr = taskController.text;
     
     Map<String, dynamic> task = Map();
@@ -52,6 +140,18 @@ class _HomeState extends State<Home> {
 
     setState(() {
       taskList.add(task);
+    });
+
+    _saveFile();
+
+  }
+
+  void _updateTask(int index) {
+    String taskStr = taskController2.text;
+
+
+    setState(() {
+      taskList[index]["title"] = taskStr;
     });
 
     _saveFile();
@@ -108,7 +208,7 @@ class _HomeState extends State<Home> {
                   TextButton(
                     child: Text("Salvar"),
                     onPressed: () {
-                      _saveTas();
+                      _saveTask();
                       Navigator.pop(context);
                     } 
                   )
