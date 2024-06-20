@@ -59,10 +59,53 @@ class _HomeState extends State<Home> {
   _list() async {
     Database db = await _recoverDatabase();
 
-    String sql = "SELECT * FROM usuarios";
+    String sql = "SELECT * FROM usuarios WHERE idade < 30";
 
     List usuarios = await db.rawQuery(sql);
     print(usuarios);
+  }
+
+  _getById(int id) async {
+    Database db = await _recoverDatabase();
+
+    List usuarios = await db.query(
+      "usuarios",
+      columns: ['nome', 'idade'],
+      where: "id = ?",
+      whereArgs: [id]
+    );
+
+    print("usuario: ${usuarios.toString()}");
+  }
+
+  _deleteById(int id) async {
+    Database db = await _recoverDatabase();
+
+    int response = await db.delete(
+      "usuarios",
+      where: "id = ?",
+      whereArgs: [id]
+    );
+
+    print("response: $response");
+  }
+
+  _updateById(int id) async {
+    Database db = await _recoverDatabase();
+
+    Map<String, dynamic> userData = {
+      "nome": "Joao",
+      "idade" : 20
+    };
+
+    int response = await db.update(
+      "usuarios", 
+      userData,
+      where: "id = ?",
+      whereArgs: [id]
+    );
+
+    print("Update: $response");
   }
 
   @override
