@@ -22,16 +22,16 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("{idCategoria}")
-    public Categoria recuperarCategoria(@PathVariable("idCategoria") Long idCategoria) {
-        return categoriaService.recuperarCategoria(idCategoria)
+    @GetMapping("{id}")
+    public Categoria recuperarCategoria(@PathVariable("id") Long id) {
+        return categoriaService.recuperarCategoria(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
-                        "Categoria número " + idCategoria + " não encontrada"));
+                        "Categoria número " + id + " não encontrada"));
     }
 
-    @GetMapping("{idCategoria}/produtos")          // http://localhost:8080/categorias/1/produtos
-    public CategoriaDTO recuperarCategoriaComProdutos(@PathVariable("idCategoria") Long idCategoria) {
-        Categoria categoria = categoriaService.recuperarCategoriaComProdutos(idCategoria);
+    @GetMapping("{id}/produtos")
+    public CategoriaDTO recuperarCategoriaComProdutos(@PathVariable("id") Long id) {
+        Categoria categoria = categoriaService.recuperarCategoriaComProdutos(id);
         return new CategoriaDTO(categoria.getId(), categoria.getNome(), categoria.getProdutos());
     }
 

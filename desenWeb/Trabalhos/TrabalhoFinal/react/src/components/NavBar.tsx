@@ -17,7 +17,7 @@ function NavBar() {
               </a>
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to="/listar-produtos">Listar todos</Link></li>
-                <li><Link className="dropdown-item" to="/meusprodutos">Meus produtos</Link></li>
+                <li><Link className="dropdown-item" to="/listar-meus-produtos">Meus produtos</Link></li>
                 <li><Link className="dropdown-item" to="/cadastrar-produto">Cadastrar produto</Link></li>
               </ul>
             </li>

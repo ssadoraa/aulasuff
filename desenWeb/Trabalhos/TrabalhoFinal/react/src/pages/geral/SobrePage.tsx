@@ -1,4 +1,4 @@
-import '../css/geral.css';
+import '../../css/geral.css';
 
 const SobrePage = () => {
     return (

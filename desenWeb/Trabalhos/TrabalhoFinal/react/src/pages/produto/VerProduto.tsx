@@ -1,6 +1,6 @@
-import useVerProduto from "../hooks/produtos/useVerProduto";
+import useVerProduto from "../../hooks/produtos/useVerProduto";
 import { useParams } from "react-router-dom";
-import "../css/geral.css";
+import "../../css/geral.css";
 
 function VerProdutoPage() {
   const { id } = useParams();
@@ -153,14 +153,13 @@ function VerProdutoPage() {
           </label>
           <div className="maq">{data.descricao}</div>
         </div>
-
       </div>
-      
+
       <div className="mt-5">
         <button type="button" className="btn btn-primary me-3">
           Negociar
         </button>
-        
+
         <button type="button" className="btn btn-danger">
           Deletar Produto
         </button>

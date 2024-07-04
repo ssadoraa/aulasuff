@@ -1,9 +1,9 @@
 import { useState } from "react";
-import TabelaDeProdutos from "../components/TabelaDeProdutos";
-import useProdutosComPaginacao from "../hooks/produtos/useProdutosComPaginacao";
-import Paginacao from "../components/Paginacao";
+import TabelaDeProdutos from "../../components/TabelaDeProdutos";
+import useProdutosComPaginacao from "../../hooks/produtos/useProdutosComPaginacao";
+import Paginacao from "../../components/Paginacao";
 
-const ListaDeProdutosPage = () => {
+const ListaMeusDeProdutosPage = () => {
   const [pagina, setPagina] = useState(0);
   const tamanho = 5;
 
@@ -36,4 +36,4 @@ const ListaDeProdutosPage = () => {
     </div>
   );
 };
-export default ListaDeProdutosPage;
+export default ListaMeusDeProdutosPage;

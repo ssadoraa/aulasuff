@@ -1,5 +1,5 @@
-import '../css/geral.css';
-import '../css/home.css';
+import '../../css/geral.css';
+import '../../css/home.css';
 
 const HomePage = () => {
     return (

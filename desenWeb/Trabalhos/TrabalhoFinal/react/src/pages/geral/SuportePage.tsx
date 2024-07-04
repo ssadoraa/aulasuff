@@ -1,4 +1,4 @@
-import '../css/geral.css';
+import '../../css/geral.css';
 
 const SuportePage = () => {
     return (

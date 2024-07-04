@@ -21,7 +21,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping   // http://localhost:8080/produtos
+    @GetMapping
     public List<Produto> recuperarProdutos() {
         return produtoService.recuperarProdutos();
     }
@@ -37,28 +37,26 @@ public class ProdutoController {
         return new ResponseEntity<Produto>(umProduto,HttpStatus.OK);
     }
 
-    @DeleteMapping ("{idProduto}")     // http://localhost:8080/produtos/1
-    public void removerProduto(@PathVariable("idProduto") Long id) {
+    @DeleteMapping ("{id}")
+    public void removerProduto(@PathVariable("id") Long id) {
         produtoService.removerProduto(id);
     }
     
-    @GetMapping ("/ver/{idProduto}")     // http://localhost:8080/produtos/ver/1
-    public Produto verProduto(@PathVariable("idProduto") Long id) {
+    @GetMapping ("/ver/{id}")
+    public Produto verProduto(@PathVariable("id") Long id) {
         return produtoService.recuperarProdutoPeloId(id);
     }
 
-    @GetMapping("categoria/{idCategoria}")             // http://localhost:8080/produtos/categoria/1
+    @GetMapping("categoria/{idCategoria}")
     public List<Produto> recuperarProdutosPorIdDaCategoria(@PathVariable("idCategoria") Long idCategoria) {
-        System.out.println(idCategoria);
         return produtoService.recuperarProdutosPorIdDaCategoria(idCategoria);
     }
 
-    @GetMapping("categorias")    // http://localhost:8080/produtos/categorias
+    @GetMapping("categorias")
     public List<Produto> recuperarProdutosComCategoria() {
         return produtoService.recuperarProdutosComCategoria();
     }
 
-    // http://localhost:8080/produtos/paginacao?pagina=0&tamanho=5
     @GetMapping("paginacao")
     public ResultadoPaginado<Produto> recuperarProdutosComPaginacao(
             @RequestParam(value = "pagina", defaultValue = "0") int pagina,
