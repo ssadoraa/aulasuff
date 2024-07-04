@@ -12,10 +12,8 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
       <thead>
         <tr>
           <th className="align-middle text-center">Id</th>
-          <th className="align-middle text-center">Imagem</th>
           <th className="align-middle text-center">Categoria</th>
           <th className="align-middle text-center">Nome</th>
-          <th className="align-middle text-center">Condição</th>
           <th className="align-middle text-center">Status</th>
           <th className="align-middle text-center">Ação</th>
         </tr>
@@ -24,13 +22,12 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
         {produtos.map((produto) => (
           <tr key={produto.id}>
             <td width="8%" className="align-middle text-center">{produto.id}</td>
-            <td width="12%" className="align-middle text-center"><img src={produto.imagem} width={45} /></td>
             <td width="12%" className="align-middle text-center">{produto.categoria.nome}</td>
             <td width="28%" className="align-middle text-center">{produto.nome}</td>
-            <td width="8%" className="align-middle text-center">{produto.condicao}</td>
             <td width="12%" className="align-middle text-center">{produto.status}</td>
             <td width="8%" className="align-middle text-center">
               <Link className="btn btn-danger btn-sm" to={`/ver/${produto.id}`}>Ver</Link>
+              <Link className="btn btn-danger btn-sm" to={`/editar/${produto.id}`}>Editar</Link>
             </td>
           </tr>
         ))}

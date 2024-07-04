@@ -5,7 +5,7 @@ import Paginacao from "../../components/Paginacao";
 
 const ListaMeusDeProdutosPage = () => {
   const [pagina, setPagina] = useState(0);
-  const tamanho = 5;
+  const tamanho = 10;
 
   const tratarPaginacao = (pagina: number) => {
     setPagina(pagina);

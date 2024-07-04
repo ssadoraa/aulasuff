@@ -16,7 +16,7 @@ const CardsDeProdutos = () => {
 
   return (
     <>
-      <h5 className="mb-4">{slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "Produtos"}</h5>
+      <h5 className="mb-4">Produtos</h5>
       <div className="row">
         {produtos?.map((produto) => (
           <div className="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">

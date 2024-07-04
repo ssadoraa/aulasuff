@@ -13,11 +13,11 @@ const ListaTodosProdutos = () => {
                 <div className="col-lg-2">
                     <h5>Categorias</h5>
                     <div className="nav flex-column nav-pills" style={{ maxHeight: "calc(100vh - 100px)", overflowY: "scroll", display: "block" }}>
-                        <NavLink to="/" className="nav-link" style={{ width: "100%" }}>Todos</NavLink>
+                        <NavLink to="/listar-produtos" className="nav-link" style={{ width: "100%" }}>Todos</NavLink>
                         {categorias.map((categoria) => (
                             <NavLink
                                 key={categoria.id}
-                                to={`/${categoria.nome}`}
+                                to={`/listar-produtos/${categoria.id}`}
                                 className="nav-link"
                                 style={{ width: "100%" }}
                             >
