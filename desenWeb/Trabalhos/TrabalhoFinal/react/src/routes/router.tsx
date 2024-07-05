@@ -10,6 +10,7 @@ import ListaTodosProdutos from "../pages/produto/ListaTodosProtudos";
 import CardsDeProdutos from "../pages/produto/CardsDeProdutos";
 import ListaMeusDeProdutosPage from "../pages/produto/ListaMeusProdutos";
 import ProdutosSelecionados from "../pages/produto/ProdutosSelecionados";
+import EditarProduto from "../pages/produto/EditarProduto";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       { path: "sobre", element: <SobrePage /> },
       { path: "suporte", element: <SuportePage /> },
       { path: "ver/:id", element: <VerProdutoPage /> },
-      { path: "editar/:id", element: <CadastrarProduto /> },
+      { path: "editar/:id", element: <EditarProduto /> },
       { path: "produtos-selecionados", element: <ProdutosSelecionados /> },
     ],
   },
