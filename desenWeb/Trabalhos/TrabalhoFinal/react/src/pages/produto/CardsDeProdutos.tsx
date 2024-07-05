@@ -21,7 +21,7 @@ const CardsDeProdutos = () => {
         {produtos?.map((produto) => (
           <div className="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
             <Card
-              imagem={produto.imagem}
+              imagem={produto.imagem || ""}
               titulo={produto.nome}
               descricao={produto.condicao}
               preco={produto.valorEstimado.toLocaleString("pt-BR", {
