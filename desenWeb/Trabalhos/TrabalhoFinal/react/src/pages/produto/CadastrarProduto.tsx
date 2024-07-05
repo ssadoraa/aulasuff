@@ -1,9 +1,39 @@
+import { useState } from "react";
 import "../../css/geral.css";
 import useCategorias from "../../hooks/categorias/useBuscarCategorias";
+import useCadastrarProduto from "../../hooks/produtos/useCadastrarProduto";
 import Categoria from "../../interfaces/categoria";
+import Produto from "../../interfaces/produto";
 
-const CadastroDeProdutosPage = () => {
+const CadastrarProduto = () => {
   const { data: categorias, isLoading, isError } = useCategorias();
+  const cadastrarProduto = useCadastrarProduto();
+
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [categoria, setCategoria] = useState<Categoria | null>(null);
+  const [condicao, setCondicao] = useState("");
+  const [valorEstimado, setValorEstimado] = useState("");
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    
+    if (!categoria) {
+      alert("Por favor, selecione uma categoria.");
+      return;
+    }
+
+    const produto: Produto = {
+      nome,
+      descricao,
+      categoria,
+      condicao,
+      valorEstimado: Number(valorEstimado),
+      status,
+    };
+    cadastrarProduto.mutate(produto);
+  };
 
   if (isLoading) return <div>Carregando...</div>;
   if (isError || categorias === undefined)
@@ -12,7 +42,7 @@ const CadastroDeProdutosPage = () => {
   return (
     <div className="container mt-5">
       <h2>Cadastre um produto</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="nome" className="form-label">
             Produto:
@@ -22,6 +52,8 @@ const CadastroDeProdutosPage = () => {
             className="form-control"
             id="nome"
             placeholder="Nome do produto"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -32,14 +64,24 @@ const CadastroDeProdutosPage = () => {
             className="form-control"
             id="descricao"
             placeholder="Descrição"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
           ></textarea>
         </div>
         <div className="mb-3">
           <label htmlFor="categoria" className="form-label">
             Categoria:
           </label>
-          <select className="form-select" id="categoria">
-            <option disabled selected>
+          <select
+            className="form-select"
+            id="categoria"
+            value={categoria ? categoria.id : ""}
+            onChange={(e) => {
+              const selectedCategoria = categorias.find(cat => cat.id === parseInt(e.target.value, 10));
+              setCategoria(selectedCategoria || null);
+            }}
+          >
+            <option disabled value="">
               Selecione uma categoria...
             </option>
             {categorias.map((categoria: Categoria) => (
@@ -61,6 +103,8 @@ const CadastroDeProdutosPage = () => {
                 name="condicao"
                 id="usado"
                 value="usado"
+                checked={condicao === "usado"}
+                onChange={(e) => setCondicao(e.target.value)}
               />
               <span className="form-check-label">Usado</span>
             </div>
@@ -71,6 +115,8 @@ const CadastroDeProdutosPage = () => {
                 name="condicao"
                 id="novo"
                 value="novo"
+                checked={condicao === "novo"}
+                onChange={(e) => setCondicao(e.target.value)}
               />
               <span className="form-check-label">Novo</span>
             </div>
@@ -81,6 +127,8 @@ const CadastroDeProdutosPage = () => {
                 name="condicao"
                 id="sem_funcionalidade"
                 value="sem_funcionalidade"
+                checked={condicao === "sem_funcionalidade"}
+                onChange={(e) => setCondicao(e.target.value)}
               />
               <span className="form-check-label">Sem Funcionalidade</span>
             </div>
@@ -95,14 +143,21 @@ const CadastroDeProdutosPage = () => {
             className="form-control"
             id="valorEstimado"
             placeholder="Valor Estimado"
+            value={valorEstimado}
+            onChange={(e) => setValorEstimado(e.target.value)}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="status" className="form-label">
             Status:
           </label>
-          <select className="form-select" id="status">
-            <option disabled selected>
+          <select
+            className="form-select"
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option disabled value="">
               Selecione o status
             </option>
             <option value="ativo">Ativo</option>
@@ -123,4 +178,4 @@ const CadastroDeProdutosPage = () => {
   );
 };
 
-export default CadastroDeProdutosPage;
+export default CadastrarProduto;

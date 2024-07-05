@@ -1,12 +1,21 @@
 import Produto from "../interfaces/produto";
 import { Link } from "react-router-dom";
 import '../css/geral.css';
+import useRemoverProduto from "../hooks/produtos/useRemoverProduto";
 
 interface Props {
   produtos: Produto[];
 }
 
 const TabelaDeProdutos = ({ produtos }: Props) => {
+  const { mutate: excluirProduto } = useRemoverProduto();
+
+  const handleExcluirProduto = (id?: number) => {
+    if (id && window.confirm("Tem certeza que deseja excluir este produto?")) {
+      excluirProduto(id);
+    }
+  };
+
   return (
     <table className="table table-responsive table-sm table-hover table-bordered">
       <thead>
@@ -26,8 +35,16 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
             <td width="28%" className="align-middle text-center">{produto.nome}</td>
             <td width="12%" className="align-middle text-center">{produto.status}</td>
             <td width="8%" className="align-middle text-center">
-              <Link className="btn btn-danger btn-sm" to={`/ver/${produto.id}`}>Ver</Link>
-              <Link className="btn btn-danger btn-sm" to={`/editar/${produto.id}`}>Editar</Link>
+              <div className="dropdown">
+                <button className="btn btn-info btn-sm text-white dropdown-toggle" type="button" id={`dropdownMenuButton${produto.id}`} data-bs-toggle="dropdown" aria-expanded="false">
+                  Ações
+                </button>
+                <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton${produto.id}`}>
+                  <li><Link className="dropdown-item" to={`/ver/${produto.id}`}>Ver</Link></li>
+                  <li><Link className="dropdown-item" to={`/editar/${produto.id}`}>Editar</Link></li>
+                  <li><button className="dropdown-item" onClick={() => handleExcluirProduto(produto.id)}>Excluir</button></li>
+                </ul>
+              </div>
             </td>
           </tr>
         ))}
@@ -35,4 +52,5 @@ const TabelaDeProdutos = ({ produtos }: Props) => {
     </table>
   );
 };
+
 export default TabelaDeProdutos;

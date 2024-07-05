@@ -24,8 +24,11 @@ function NavBar() {
             <li className="nav-item">
               <Link className="nav-link" to="/sobre">Sobre</Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item me-5">
               <Link className="nav-link" to="/suporte">Suporte</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/produtos-selecionados">Produtos Selecionados</Link>
             </li>
           </ul>
         </div>

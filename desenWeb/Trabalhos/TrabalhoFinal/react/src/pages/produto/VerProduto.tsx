@@ -159,10 +159,6 @@ function VerProdutoPage() {
         <button type="button" className="btn btn-primary me-3">
           Negociar
         </button>
-
-        <button type="button" className="btn btn-danger">
-          Deletar Produto
-        </button>
       </div>
     </div>
   );
