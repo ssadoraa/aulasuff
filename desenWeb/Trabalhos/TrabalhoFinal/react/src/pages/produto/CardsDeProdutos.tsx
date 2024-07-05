@@ -24,12 +24,18 @@ const CardsDeProdutos = () => {
               imagem={produto.imagem || ""}
               titulo={produto.nome}
               descricao={produto.condicao}
-              preco={produto.valorEstimado.toLocaleString("pt-BR", {
+              valorEstimado={produto.valorEstimado.toLocaleString("pt-BR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-                useGrouping: true
+                useGrouping: true,
               })}
-              footer={<input type="button" className="btn btn-primary btn-sm w-100" value="Adicionar" />}
+              footer={
+                <input
+                  type="button"
+                  className="btn btn-primary btn-sm w-100"
+                  value="Adicionar"
+                />
+              }
             />
           </div>
         ))}

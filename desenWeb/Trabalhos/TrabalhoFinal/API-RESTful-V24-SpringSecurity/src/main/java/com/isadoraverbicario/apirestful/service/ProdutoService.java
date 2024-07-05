@@ -23,6 +23,10 @@ public class ProdutoService {
         return produtoRepository.recuperarProdutosComCategoria();
     }
 
+    public Produto recuperarProdutoPeloId(long idProduto) {
+        return produtoRepository.findById(idProduto).orElse(null);
+    }
+
     public Produto cadastrarProduto(Produto produto) {
         if (produto.getId() == null) {
             return produtoRepository.save(produto);

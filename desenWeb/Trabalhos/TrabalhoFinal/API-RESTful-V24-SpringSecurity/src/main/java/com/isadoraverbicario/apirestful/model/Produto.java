@@ -2,7 +2,6 @@ package com.isadoraverbicario.apirestful.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -20,7 +19,6 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "A 'Imagem' deve ser informada.")
     private String imagem;
 
     @NotEmpty(message = "O 'Nome' deve ser informado.")
@@ -28,15 +26,16 @@ public class Produto {
 
     @NotEmpty(message = "A 'Descrição' deve ser informada.")
     private String descricao;
-
-    private boolean disponivel;
-
-    @Min(value=0, message = "A 'Quantidade em estoque' deve ser maior ou igual a 0.")
-    private int qtdEstoque;
+    
+    @NotEmpty(message = "A 'Condição' deve ser informada.")
+    private String condicao;
+    
+    @NotEmpty(message = "O 'Status' deve ser informado.")
+    private String status;
 
     @NotNull(message = "O 'Preço' deve ser informado.")
     @DecimalMin(inclusive = true, value="0.1", message = "O 'Preço' deve ser maior ou igual a 0.1.")
-    private BigDecimal preco;
+    private BigDecimal valorEstimado;
 
     @NotNull(message = "A 'Data de Cadastro' deve ser informada.")
     private LocalDate dataCadastro;
@@ -47,17 +46,17 @@ public class Produto {
     public Produto(String imagem,
                    String nome,
                    String descricao,
-                   boolean disponivel,
-                   int qtdEstoque,
-                   BigDecimal preco,
+                   String condicao,
+                   String status,
+                   BigDecimal valorEstimado,
                    LocalDate dataCadastro,
                    Categoria categoria) {
         this.imagem = imagem;
         this.nome = nome;
         this.descricao = descricao;
-        this.disponivel = disponivel;
-        this.qtdEstoque = qtdEstoque;
-        this.preco = preco;
+        this.condicao = condicao;
+        this.status = status;
+        this.valorEstimado = valorEstimado;
         this.dataCadastro = dataCadastro;
         this.categoria = categoria;
     }
