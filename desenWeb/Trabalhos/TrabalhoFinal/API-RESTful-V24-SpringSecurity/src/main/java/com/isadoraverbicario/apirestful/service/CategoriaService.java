@@ -1,5 +1,6 @@
 package com.isadoraverbicario.apirestful.service;
 
+import com.isadoraverbicario.apirestful.exception.EntidadeDestacadaException;
 import com.isadoraverbicario.apirestful.exception.EntidadeNaoEncontradaException;
 import com.isadoraverbicario.apirestful.model.Categoria;
 import com.isadoraverbicario.apirestful.repository.CategoriaRepository;
@@ -17,6 +18,16 @@ public class CategoriaService {
 
     public Optional<Categoria> recuperarCategoria(Long idCategoria) {
         return categoriaRepository.findById(idCategoria);
+    }
+
+    public Categoria cadastrarCategoria(Categoria categoria) {
+        if (categoria.getId() == null) {
+            return categoriaRepository.save(categoria);
+        }
+        else {
+            throw new EntidadeDestacadaException(
+                "Tentando cadastrar um objeto destacado.");
+        }
     }
 
     public Categoria recuperarCategoriaComProdutos(Long idCategoria) {

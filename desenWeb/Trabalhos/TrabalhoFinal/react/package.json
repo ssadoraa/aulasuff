@@ -11,6 +11,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.7.0",
     "@tanstack/react-query": "^5.32.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.2.3",
@@ -18,8 +19,10 @@
     "i": "^0.3.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.11.2",
+    "zod": "^3.23.8",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

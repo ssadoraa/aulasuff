@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("categorias")
@@ -16,6 +17,11 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @PostMapping
+    public Categoria cadastrarCategoria(@RequestBody Categoria categoria) {
+        return categoriaService.cadastrarCategoria(categoria);
+    }
 
     @GetMapping 
     public List<Categoria> recuperarCategorias() {

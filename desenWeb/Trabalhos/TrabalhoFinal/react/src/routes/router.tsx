@@ -13,6 +13,7 @@ import ProdutosSelecionados from "../pages/produto/ProdutosSelecionados";
 import EditarProduto from "../pages/produto/EditarProduto";
 import CadastrarCategoria from "../pages/categoria/CadastrarCategoria";
 import PrivateRoutes from "./PrivateRoutes";
+import LoginPage from "../pages/geral/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "sobre", element: <SobrePage /> },
       { path: "suporte", element: <SuportePage /> },
       { path: "ver/:id", element: <VerProdutoPage /> },
+      { path: "login", element: <LoginPage /> },
     ],
   },
   {
